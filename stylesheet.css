@@ -1,4 +1,19 @@
-h1 {
-    background-color: violet;
+header {
+    background-color: rgb(190, 135, 255);
+    /*color: white;*/
     padding: 10px;
 }
+
+nav ul li {
+    list-style: none;
+    display: inline;
+    padding: 0px 10px;
+}
+
+footer {
+    text-align: center;
+}
+
+
+
+
