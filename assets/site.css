@@ -61,9 +61,8 @@ p { margin: 0 0 14px; }
 .filters .search-label { flex: 1; }
 .filters input, .filters select { font: inherit; font-size: .9rem; color: var(--ink); background: #fff; border: 1px solid #aaa; border-radius: 2px; padding: 7px 9px; min-height: 42px; }
 .filters input { width: 100%; }
-.filter-result, .status, .empty { color: var(--muted); font-size: .82rem; }
+.filter-result, .empty { color: var(--muted); font-size: .82rem; }
 .filter-result { margin: 0 0 22px; }
-.status { margin: 22px 0 0; }
 .site-footer { margin-top: 38px; padding: 14px 0 28px; border-top: 1px solid var(--line); color: var(--muted); font-size: .75rem; }
 .site-footer p { margin: 0; }
 @media (max-width: 600px) {

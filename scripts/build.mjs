@@ -45,7 +45,7 @@ const content = {
     achievementsIntro:'論文・プレプリントと、学会・研究会での発表を掲載しています。',
     search:'キーワード', placeholder:'題目・共著者・研究会名', type:'発表種別', allType:'すべて',
     oral:'口頭発表', poster:'ポスター発表', year:'年', allYear:'すべての年',
-    saved:`発表一覧：${talks.updated}取得の記録`, updated:'更新：2026年10月31日'
+    updated:'更新：2026年10月31日'
   },
   en: {
     home:'About', achievements:'Publications & talks', contact:'Contact', skip:'Skip to content',
@@ -72,7 +72,7 @@ const content = {
     achievementsIntro:'Publications, preprints, and presentations at conferences and workshops. Presentation titles are shown in their original language.',
     search:'Search', placeholder:'Title, author, or event', type:'Presentation type', allType:'All types',
     oral:'Talk', poster:'Poster', year:'Year', allYear:'All years',
-    saved:`Presentations: saved on ${talks.updated}`, updated:'Updated: 31 October 2026'
+    updated:'Updated: 31 October 2026'
   }
 };
 
@@ -135,8 +135,6 @@ for (const lang of ['ja','en']) for (const page of ['home','achievements']) {
       <p id="filter-result" class="filter-result" role="status" hidden></p>
       <ol id="talk-list" class="records">${talks.items.map(p => talkHTML(p,lang)).join('\n')}</ol>
       <p class="empty" id="empty" hidden>${lang==='ja'?'該当する発表はありません。':'No matching presentations.'}</p>
-      <p id="sync-status" class="status" role="status">${t.saved}</p>
-      <noscript><p class="status">${lang==='ja'?'保存済みの発表一覧を表示しています。':'Showing the saved presentation list.'}</p></noscript>
     </section>`;
   const title = `${isHome?'':t.achievements+' | '}須田亮介 / Ryosuke Suda`;
   const html = `<!doctype html>

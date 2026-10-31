@@ -28,13 +28,10 @@ async function fetchCSV(url) {
   return response.text();
 }
 if (sources.talksCsvUrl) {
-  const status = document.getElementById('sync-status');
-  status.textContent = isJa ? '保存済みの一覧を表示しています。最新の発表記録を確認中…' : 'Showing saved presentations. Checking for updates…';
   fetchCSV(sources.talksCsvUrl).then(csv=>{
     talks = talksFromCSV(csv); populateYears(); render();
-    status.textContent = isJa ? '発表一覧：Google Sheetsの最新の記録を表示しています。' : 'Presentations updated from Google Sheets.';
   }).catch(()=>{
-    status.textContent = isJa ? `最新の発表記録を取得できなかったため、${sources.talksUpdated}取得の一覧を表示しています。` : `Updates unavailable. Showing presentations saved on ${sources.talksUpdated}.`;
+    // Keep the saved list when updates are unavailable.
   });
 }
 if (sources.publicationsCsvUrl) {
