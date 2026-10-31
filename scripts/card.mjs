@@ -34,9 +34,7 @@ export function cardHTML(card, lang, version) {
           <p>${e(card.affiliationJa[1])} · ${e(card.affiliationJa[2])}</p>
         </div>
         <div class="affiliation-en" lang="en">
-          <p>${e(card.affiliationEn[0])}</p>
-          <p>${e(card.affiliationEn[1])}</p>
-          <p>${e(card.affiliationEn[2])} · ${e(card.affiliationEn[3])}</p>
+          ${card.affiliationEn.map(line => `<p>${e(line)}</p>`).join('\n          ')}
         </div>
         <div class="card-contact">
           <a href="mailto:${e(card.email)}">${e(card.email)}</a>

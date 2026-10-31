@@ -33,7 +33,6 @@ line(card['affiliationJa'][0], 411, 37)
 line(' · '.join(card['affiliationJa'][1:]), 468, 34)
 line(card['affiliationEn'][0], 551, 30, muted)
 line(card['affiliationEn'][1], 596, 29, muted)
-line(' · '.join(card['affiliationEn'][2:]), 641, 28, muted)
 line(card['email'], 761, 36, purple)
 line(card['website'].removeprefix('https://').rstrip('/'), 820, 34, purple)
 
