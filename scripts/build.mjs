@@ -26,6 +26,9 @@ const content = {
     name:'須田 亮介', otherName:'Ryosuke Suda',
     intro:'素粒子論と場の理論を中心に研究しています。理論の数理的な構造から、模型構築や現象論、実験・観測との関係まで関心があります。',
     research:'研究関心',
+    figureTitle:'sine-Gordon 方程式のブリーザー',
+    figureAlt:'空間 x に局在し、時間 t に沿って周期的に振動する場 φ の厳密解。',
+    figureOpen:'ブリーザーの図を拡大',
     topics:[
       {
         title:'場の理論・数理物理',
@@ -52,6 +55,9 @@ const content = {
     name:'Ryosuke Suda', otherName:'須田 亮介',
     intro:'My research centers on particle physics and field theory. My interests range from the mathematical structure of theories to model building, particle phenomenology, and connections with experiments and observations.',
     research:'Research interests',
+    figureTitle:'A breather of the sine-Gordon equation',
+    figureAlt:'An exact field solution φ localized in space x and oscillating periodically in time t.',
+    figureOpen:'Enlarge the breather illustration',
     topics:[
       {
         title:'Field theory and mathematical physics',
@@ -104,7 +110,14 @@ for (const lang of ['ja','en']) for (const page of ['home','achievements']) {
       ${contact}
       <p class="intro-text">${e(t.intro)}</p>
     </div>`;
-  const homeBody = `${introduction}${research}
+  const fieldFigure = `
+    <figure class="field-figure">
+      <a class="figure-image" href="${base}assets/sine-gordon-breather.svg" aria-label="${t.figureOpen}">
+        <img src="${base}assets/sine-gordon-breather.svg" width="820" height="230" alt="${t.figureAlt}">
+      </a>
+      <figcaption><a href="https://doi.org/10.1007/s42985-021-00084-w">${t.figureTitle}</a></figcaption>
+    </figure>`;
+  const homeBody = `${introduction}${fieldFigure}${research}
     <section class="section" aria-labelledby="recent-title">
       <h2 id="recent-title">${t.selected}</h2>
       <ol class="records">${papers.items.slice(0,3).map(p => publicationHTML(p,lang)).join('\n')}</ol>

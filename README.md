@@ -8,6 +8,7 @@
 研究関心は「場の理論・数理物理」と「AI for theoretical physics」を中心に、
 現象論および数学・物性物理・情報科学・工学との双方向の応用も含める。
 白地の1列構成を基本とし、本文と業績を通常の見出しとリンクで掲載する。
+リンク・見出し・罫線には紫を使用し、トップページに既知のsine-Gordonブリーザーの図を添える。
 
 ## 構成と統合
 
@@ -27,6 +28,19 @@ npmパッケージのインストールやサーバー側のプログラムは�
 | `data/sources.json` | 公開CSVの取得先、保存済みデータの取得日 |
 | `assets/records.mjs` | CSV解釈、日付・URL検証、HTMLエスケープ |
 | `assets/achievements.mjs` | Sheets更新、発表の検索・絞り込み |
+| `assets/sine-gordon-breather.svg` | 既知の厳密解から描いたブリーザーの図 |
+| `scripts/draw-breather.py` | 図の再生成（NumPy・Matplotlibが必要） |
+
+## トップページの図
+
+無次元のsine-Gordon方程式 `φ_tt - φ_xx + sin(φ) = 0` の既知のブリーザーを描画する。
+`φ(x,t) = 4 atan(sqrt(1-ω²) sin(ωt) / (ω cosh(sqrt(1-ω²)x)))`、`ω = 0.8`。
+空間 `x` は `[-8,8]`、時間 `t` は2周期を表示し、場の値 `φ` を高さにとる。
+出典は [A uniqueness result for the Sine-Gordon breather, Eq. (1)](https://doi.org/10.1007/s42985-021-00084-w)。
+一般に知られている解の可視化であり、このサイトの著者による新しい研究成果ではない。
+
+図を変更するときだけ `python3 scripts/draw-breather.py` を実行する。
+生成済みSVGをGitに含めるため、通常のサイトビルドや配信にPythonは不要。
 
 ## 更新
 
