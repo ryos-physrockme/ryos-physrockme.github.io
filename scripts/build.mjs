@@ -33,7 +33,7 @@ const content = {
   ja: {
     home:'自己紹介', achievements:'論文・発表', contact:'連絡先', skip:'本文へ',
     name:'須田 亮介', otherName:'Ryosuke Suda',
-    intro:'素粒子論と場の理論を中心に研究しています。理論の数理的な構造から、模型構築や現象論、実験・観測との関係まで関心があります。',
+    intro:'素粒子論と場の理論を中心に研究しています。理論の数理的な構造から、模型構築や現象論まで関心があります。',
     research:'研究関心',
     topics:[
       {
@@ -59,7 +59,7 @@ const content = {
   en: {
     home:'About', achievements:'Publications & talks', contact:'Contact', skip:'Skip to content',
     name:'Ryosuke Suda', otherName:'須田 亮介',
-    intro:'My research centers on particle physics and field theory. My interests range from the mathematical structure of theories to model building, particle phenomenology, and connections with experiments and observations.',
+    intro:'My research centers on particle physics and field theory. My interests range from the mathematical structure of theories to model building and particle phenomenology.',
     research:'Research interests',
     topics:[
       {
