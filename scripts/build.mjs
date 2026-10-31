@@ -159,7 +159,6 @@ for (const lang of ['ja','en']) for (const page of ['home','achievements']) {
       <nav class="nav" aria-label="${lang==='ja'?'メインナビゲーション':'Main navigation'}">
         <a href="${home}"${isHome?' aria-current="page"':''}>${t.home}</a>
         <a href="${achievements}"${!isHome?' aria-current="page"':''}>${t.achievements}</a>
-        <a class="contact-nav" href="${isHome?'#contact':home+'#contact'}">${t.contact}</a>
         <a class="language" href="${other}" lang="${lang==='ja'?'en':'ja'}" hreflang="${lang==='ja'?'en':'ja'}">${lang==='ja'?'English':'日本語'}</a>
       </nav>
     </header>
