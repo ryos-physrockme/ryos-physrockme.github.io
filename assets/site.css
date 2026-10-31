@@ -32,6 +32,7 @@ p { margin: 0 0 14px; }
 .nav a[aria-current] { color: var(--ink); font-weight: 600; text-decoration: none; }
 .nav .language { margin-left: auto; }
 .introduction { padding-top: 12px; }
+.site-motto { color: var(--link); font-size: .9rem; font-weight: 500; letter-spacing: .03em; margin: 0 0 8px; }
 .other-name { display: inline-block; font-size: 1.2rem; font-weight: 400; margin-left: 14px; }
 .contact { font-size: .9rem; margin: 0 0 24px; }
 .contact p { margin: 0 0 4px; }

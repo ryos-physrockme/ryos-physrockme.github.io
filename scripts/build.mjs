@@ -113,6 +113,7 @@ for (const lang of ['ja','en']) for (const page of ['home','achievements']) {
     </section>`;
   const introduction = `
     <div class="introduction">
+      <p class="site-motto" lang="en">Physics Rocks You</p>
       <h1>${t.name} <span class="other-name" lang="${lang==='ja'?'en':'ja'}">${t.otherName}</span></h1>
       ${contact}
       <p class="intro-text" data-math>${e(t.intro)}</p>
