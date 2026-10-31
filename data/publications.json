@@ -1,0 +1,55 @@
+{
+  "updated": "2026-10-31",
+  "items": [
+    {
+      "date": "2026-08-05",
+      "title": "Machine-Learning Search for Lax Connections",
+      "authors": "Osamu Fukushima, Tomohiro Shigemura, Ryosuke Suda, Norihiro Tanahashi, Kentaroh Yoshida",
+      "arxiv": "2608.05146",
+      "category": "hep-th",
+      "journal": "",
+      "doi": "",
+      "source": "https://arxiv.org/abs/2608.05146"
+    },
+    {
+      "date": "2025-07-01",
+      "title": "Lepton flavor violating decay of true muonium: (μ⁺μ⁻) → μ±e∓",
+      "authors": "Ryotaro Minato, Akira Sato, Ryosuke Suda, Masato Yamanaka",
+      "arxiv": "2507.01193",
+      "category": "hep-ph",
+      "journal": "",
+      "doi": "",
+      "source": "https://arxiv.org/abs/2507.01193"
+    },
+    {
+      "date": "2025-05-26",
+      "title": "Resonances in Lifetimes of AdS Oscillon",
+      "authors": "Takaki Matsumoto, Kanta Nakano, Ryosuke Suda, Kentaroh Yoshida",
+      "arxiv": "2505.20233",
+      "category": "hep-th",
+      "journal": "",
+      "doi": "",
+      "source": "https://arxiv.org/abs/2505.20233"
+    },
+    {
+      "date": "2024-12-27",
+      "title": "Oscillons in AdS space",
+      "authors": "Takaaki Ishii, Takaki Matsumoto, Kanta Nakano, Ryosuke Suda, Kentaroh Yoshida",
+      "arxiv": "2412.19468",
+      "category": "hep-th",
+      "journal": "",
+      "doi": "",
+      "source": "https://arxiv.org/abs/2412.19468"
+    },
+    {
+      "date": "2023-05-02",
+      "title": "Model building by coset space dimensional reduction scheme using eight-dimensional coset spaces",
+      "authors": "Kento Asai, Joe Sato, Ryosuke Suda, Yasutaka Takanishi, Masaki J. S. Yang",
+      "arxiv": "2305.01421",
+      "category": "hep-ph",
+      "journal": "JHEP 11 (2023) 213",
+      "doi": "10.1007/JHEP11(2023)213",
+      "source": "https://doi.org/10.1007/JHEP11(2023)213"
+    }
+  ]
+}

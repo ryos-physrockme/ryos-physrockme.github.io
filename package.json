@@ -1,0 +1,12 @@
+{
+  "name": "ryosuke-suda-website",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "sync": "node scripts/sync.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "export": "node scripts/export.mjs"
+  },
+  "engines": { "node": ">=20" }
+}
