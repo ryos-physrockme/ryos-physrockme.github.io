@@ -83,7 +83,7 @@ export function mergePublications(saved, incoming) {
   return newestFirst([...entries.values()]);
 }
 
-function link(url, label) { return safeURL(url) ? `<a href="${escapeHTML(safeURL(url))}" rel="noopener noreferrer">${escapeHTML(label)} <span aria-hidden="true">↗</span></a>` : ''; }
+function link(url, label) { return safeURL(url) ? `<a href="${escapeHTML(safeURL(url))}" rel="noopener noreferrer">${escapeHTML(label)}</a>` : ''; }
 function authorLine(authors) { return escapeHTML(authors).replace(/Ryosuke Suda|R\. Suda|須田亮介|須田 亮介/g, '<strong>$&</strong>'); }
 
 export function publicationHTML(p, lang = 'ja') {
