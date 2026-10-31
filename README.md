@@ -28,6 +28,8 @@ npmパッケージのインストールやサーバー側のプログラムは�
 | `data/sources.json` | 公開CSVの取得先、保存済みデータの取得日 |
 | `assets/records.mjs` | CSV解釈、日付・URL検証、HTMLエスケープ |
 | `assets/achievements.mjs` | Sheets更新、発表の検索・絞り込み |
+| `assets/math.mjs` | KaTeXによる数式表示。初期表示・一覧更新・絞り込みに対応 |
+| `assets/vendor/katex-0.19.1/` | 同梱するKaTeX本体、CSS、フォント、MITライセンス |
 | `data/card.json` | 名刺に掲載する氏名、所属、学年、メール、サイトURL |
 | `scripts/card.mjs` | 日英の名刺ページ生成 |
 | `scripts/card-assets.py` | QRコードと保存用PNGの再生成 |
@@ -48,6 +50,29 @@ GitHub Pagesは `main` ブランチのルートを配信する構成。`.nojekyl
 公開先設定: Settings → Pages → Deploy from a branch → main / (root)。
 
 ## Google Sheets
+
+### 数式の入力
+
+論文・発表の題目、著者、掲載誌・研究会名などでは、数式部分を `$...$` または
+`\(...\)` で囲む。例えば、スプレッドシートには次のように入力する:
+
+```text
+Lepton flavor violating decay of true muonium: $(\mu^+\mu^-) \to \mu^\pm e^\mp$
+Integrable $T\bar{T}$ deformations
+```
+
+`$$...$$` と `\[...\]` は独立した行の数式に対応する。
+JSONファイルを直接編集する場合は、バックスラッシュを `\\` と書く。
+数式モード外の文字は通常の文章として扱う。LaTeX文書全体やプリアンブルは処理しない。
+対応コマンドは https://katex.org/docs/supported を参照。
+未対応の命令・不正な数式は文字として残し、ほかの業績の表示を続ける。
+各業績のマクロ定義は独立し、TeXからのリンク・HTML挿入は許可しない。
+
+KaTeX 0.19.1の配布ファイルを変更せず同梱し、閲覧時に外部配信サービスへ接続しない。
+通常のビルドにnpmパッケージのインストールは不要。
+バージョン更新時は https://www.npmjs.com/package/katex の公式パッケージから
+`dist/katex.mjs`, `dist/katex.min.css`, `dist/contrib/auto-render.mjs`, `dist/fonts/`,
+`LICENSE` を新しいバージョンのディレクトリへコピーし、インポートとCSSのパスを更新する。
 
 ### 発表
 

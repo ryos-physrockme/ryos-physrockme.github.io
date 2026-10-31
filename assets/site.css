@@ -49,6 +49,9 @@ p { margin: 0 0 14px; }
 .record:last-child { margin-bottom: 0; }
 .record-date { font-size: .83rem; color: var(--muted); font-variant-numeric: tabular-nums; padding-top: 1px; }
 .record h3 { font-size: 1rem; font-weight: 500; margin: 0 0 4px; line-height: 1.6; overflow-wrap: anywhere; }
+.record-body .katex, [data-math] .katex { font-size: 1.05em; }
+.katex-display { max-width: 100%; overflow-x: auto; overflow-y: hidden; padding: .15em 0; }
+.katex-error { overflow-wrap: anywhere; }
 .record p { margin: 0 0 3px; line-height: 1.7; }
 .authors { color: var(--muted); font-size: .86rem; }
 .authors strong { color: var(--ink); font-weight: 500; }

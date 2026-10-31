@@ -1,4 +1,5 @@
 import {talksFromCSV,publicationsFromCSV,mergePublications,talkHTML,publicationHTML} from './records.mjs';
+import {renderMath} from './math.mjs';
 const {talks: savedTalks, papers, sources} = JSON.parse(document.getElementById('saved-data').textContent);
 const lang = document.documentElement.lang, isJa = lang === 'ja';
 let talks = savedTalks;
@@ -17,6 +18,7 @@ function render() {
     (!query || [t.title,t.authors,t.venue,t.location].join(' ').toLocaleLowerCase().includes(query)));
   // The renderer escapes all external text and permits only HTTP(S) links.
   list.innerHTML = shown.map(t=>talkHTML(t,lang)).join('');
+  renderMath(list);
   result.textContent = isJa ? `${talks.length}件中 ${shown.length}件を表示` : `${shown.length} of ${talks.length} presentations`;
   document.getElementById('empty').hidden = shown.length !== 0;
 }
@@ -37,5 +39,6 @@ if (sources.talksCsvUrl) {
 if (sources.publicationsCsvUrl) {
   fetchCSV(sources.publicationsCsvUrl).then(csv=>{
     document.getElementById('publication-list').innerHTML = mergePublications(papers,publicationsFromCSV(csv)).map(p=>publicationHTML(p,lang)).join('');
+    renderMath(document.getElementById('publication-list'));
   }).catch(()=>{});
 }

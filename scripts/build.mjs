@@ -14,7 +14,8 @@ const card = await read('card');
 // Use a shared content version so navigation does not reuse older page caches.
 const versionFiles = ['scripts/build.mjs','assets/site.css','assets/favicon.svg','assets/achievements.mjs','assets/records.mjs',
   'data/publications.json','data/talks.json','data/sources.json','data/card.json',
-  'scripts/card.mjs','assets/card.css','assets/card.mjs','assets/card-website.svg','assets/card-email.svg','assets/ryosuke-suda-card.png'];
+  'scripts/card.mjs','assets/card.css','assets/card.mjs','assets/card-website.svg','assets/card-email.svg','assets/ryosuke-suda-card.png',
+  'assets/math.mjs'];
 const versionHash = createHash('sha256');
 for (const [i,bytes] of (await Promise.all(versionFiles.map(name => readFile(resolve(root,name))))).entries()) {
   versionHash.update(versionFiles[i]).update('\0').update(bytes).update('\0');
@@ -107,14 +108,14 @@ for (const lang of ['ja','en']) for (const page of ['home','achievements']) {
       ${t.topics.map(topic => `
         <section class="research-topic">
           <h3>${topic.title}</h3>
-          ${topic.paragraphs.map(p => `<p>${e(p)}</p>`).join('\n')}
+          ${topic.paragraphs.map(p => `<p data-math>${e(p)}</p>`).join('\n')}
         </section>`).join('\n')}
     </section>`;
   const introduction = `
     <div class="introduction">
       <h1>${t.name} <span class="other-name" lang="${lang==='ja'?'en':'ja'}">${t.otherName}</span></h1>
       ${contact}
-      <p class="intro-text">${e(t.intro)}</p>
+      <p class="intro-text" data-math>${e(t.intro)}</p>
       <p class="card-link"><a href="${base}${lang==='en'?'en/':''}card/index.html${version}" target="_blank" rel="noopener" aria-label="${lang==='ja'?'名刺形式で表示（新しいタブ）':'View as business card (new tab)'}">${lang==='ja'?'名刺形式で表示':'View as business card'} <span aria-hidden="true">↗</span></a></p>
     </div>`;
   const homeBody = `${introduction}${research}
@@ -162,6 +163,7 @@ for (const lang of ['ja','en']) for (const page of ['home','achievements']) {
   <meta property="og:description" content="${e(t.intro)}">
   <meta property="og:type" content="website">
   <link rel="icon" href="${base}assets/favicon.svg${version}" type="image/svg+xml">
+  <link rel="stylesheet" href="${base}assets/vendor/katex-0.19.1/katex.min.css">
   <link rel="stylesheet" href="${base}assets/site.css${version}">
 </head>
 <body>
@@ -178,8 +180,8 @@ for (const lang of ['ja','en']) for (const page of ['home','achievements']) {
     <main id="main">${isHome?homeBody:achievementsBody}</main>
     <footer class="site-footer"><p>${t.updated}</p></footer>
   </div>
-  ${!isHome?`<script id="saved-data" type="application/json">${JSON.stringify({talks:talks.items,papers:papers.items,sources}).replaceAll('<','\\u003c')}</script>
-  <script type="module" src="${base}assets/achievements.mjs${version}"></script>`:''}
+  ${isHome?`<script type="module" src="${base}assets/math.mjs${version}"></script>`:`<script id="saved-data" type="application/json">${JSON.stringify({talks:talks.items,papers:papers.items,sources}).replaceAll('<','\\u003c')}</script>
+  <script type="module" src="${base}assets/achievements.mjs${version}"></script>`}
 </body>
 </html>\n`;
   await mkdir(dirname(resolve(root,route)),{recursive:true});
