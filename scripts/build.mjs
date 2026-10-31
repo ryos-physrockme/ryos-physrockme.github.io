@@ -1,6 +1,7 @@
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import {resolve,dirname} from 'node:path';
+import {createHash} from 'node:crypto';
 import {escapeHTML as e,isoDate,newestFirst,publicationHTML,talkHTML} from '../assets/records.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -8,6 +9,14 @@ const read = async name => JSON.parse(await readFile(resolve(root, `data/${name}
 const papers = await read('publications');
 const talks = await read('talks');
 const sources = await read('sources');
+// Use a shared content version so navigation does not reuse older page caches.
+const versionFiles = ['scripts/build.mjs','assets/site.css','assets/favicon.svg','assets/achievements.mjs','assets/records.mjs',
+  'data/publications.json','data/talks.json','data/sources.json'];
+const versionHash = createHash('sha256');
+for (const [i,bytes] of (await Promise.all(versionFiles.map(name => readFile(resolve(root,name))))).entries()) {
+  versionHash.update(versionFiles[i]).update('\0').update(bytes).update('\0');
+}
+const version = `?v=${versionHash.digest('hex').slice(0,12)}`;
 papers.items = newestFirst(papers.items);
 talks.items = newestFirst(talks.items.map(t => ({...t,date:isoDate(t.date)})));
 
@@ -81,9 +90,9 @@ for (const lang of ['ja','en']) for (const page of ['home','achievements']) {
   const route = `${lang==='en'?'en/':''}${isHome?'':'achievements/'}index.html`;
   const depth = route.split('/').length - 1;
   const base = '../'.repeat(depth) || './';
-  const home = base + (lang==='en'?'en/':'') + 'index.html';
-  const achievements = base + (lang==='en'?'en/':'') + 'achievements/index.html';
-  const other = base + (lang==='ja'?'en/':'') + (isHome?'':'achievements/') + 'index.html';
+  const home = base + (lang==='en'?'en/':'') + 'index.html' + version;
+  const achievements = base + (lang==='en'?'en/':'') + 'achievements/index.html' + version;
+  const other = base + (lang==='ja'?'en/':'') + (isHome?'':'achievements/') + 'index.html' + version;
   const contact = `
     <div id="contact" class="contact" aria-label="${t.contact}">
       <p>Email: <a class="email" href="mailto:${email}">${email}</a></p>
@@ -148,8 +157,8 @@ for (const lang of ['ja','en']) for (const page of ['home','achievements']) {
   <meta property="og:title" content="${e(title)}">
   <meta property="og:description" content="${e(t.intro)}">
   <meta property="og:type" content="website">
-  <link rel="icon" href="${base}assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="${base}assets/site.css">
+  <link rel="icon" href="${base}assets/favicon.svg${version}" type="image/svg+xml">
+  <link rel="stylesheet" href="${base}assets/site.css${version}">
 </head>
 <body>
   <a class="skip" href="#main">${t.skip}</a>
@@ -166,7 +175,7 @@ for (const lang of ['ja','en']) for (const page of ['home','achievements']) {
     <footer class="site-footer"><p>${t.updated}</p></footer>
   </div>
   ${!isHome?`<script id="saved-data" type="application/json">${JSON.stringify({talks:talks.items,papers:papers.items,sources}).replaceAll('<','\\u003c')}</script>
-  <script type="module" src="${base}assets/achievements.mjs"></script>`:''}
+  <script type="module" src="${base}assets/achievements.mjs${version}"></script>`:''}
 </body>
 </html>\n`;
   await mkdir(dirname(resolve(root,route)),{recursive:true});

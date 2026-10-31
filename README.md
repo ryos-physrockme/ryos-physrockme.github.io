@@ -38,6 +38,9 @@ node --test tests/*.test.mjs
 ```
 
 生成された `index.html`, `en/`, `achievements/` もGitにコミットする。
+ページ間リンクとCSS・スクリプトのURLには、共通の内容ハッシュをクエリとして付ける。
+更新後に以前のページがブラウザのキャッシュから表示されるのを避けるためのもの。
+ブックマークなどから開いた古いページ自体が残っている場合は、再読み込みで最新版に切り替える。
 GitHub Pagesは `main` ブランチのルートを配信する構成。`.nojekyll` でJekyll処理を無効にする。
 公開先設定: Settings → Pages → Deploy from a branch → main / (root)。
 
