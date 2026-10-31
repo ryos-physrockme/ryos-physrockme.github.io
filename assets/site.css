@@ -38,6 +38,9 @@ p { margin: 0 0 14px; }
 .email { overflow-wrap: anywhere; }
 .profile-links { display: flex; flex-wrap: wrap; gap: 4px 19px; }
 .intro-text { margin: 0; }
+.card-link { margin: 16px 0 0; }
+.card-link a { display: inline-block; border: 1px solid #c5bbd4; border-radius: 3px; padding: 5px 13px; font-size: .86rem; text-decoration: none; }
+.card-link a:hover { background: #f7f5fa; }
 .section { margin-top: 34px; }
 .research-topic { margin: 0 0 21px; }
 .research-topic:last-child, .research-topic p:last-child { margin-bottom: 0; }
@@ -88,7 +91,7 @@ p { margin: 0 0 14px; }
 }
 @media print {
   body { border-top: 0; }
-  .nav, .filters, .jump-links, .skip, .filter-result { display: none !important; }
+  .nav, .filters, .jump-links, .skip, .filter-result, .card-link { display: none !important; }
   .wrap { width: 100%; }
   .site-header { padding: 0; }
   .record { break-inside: avoid; }

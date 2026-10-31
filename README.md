@@ -21,13 +21,16 @@ npmパッケージのインストールやサーバー側のプログラムは�
 
 | ファイル | 役割 |
 | --- | --- |
-| `scripts/build.mjs` | 日英の本文・共通レイアウト・4ページの生成 |
+| `scripts/build.mjs` | 日英の本文・共通レイアウト・6ページの生成 |
 | `assets/site.css` | モバイル・印刷対応のスタイル |
 | `data/publications.json` | 論文の書誌情報 |
 | `data/talks.json` | Sheetsから取得した発表の保存済みデータ |
 | `data/sources.json` | 公開CSVの取得先、保存済みデータの取得日 |
 | `assets/records.mjs` | CSV解釈、日付・URL検証、HTMLエスケープ |
 | `assets/achievements.mjs` | Sheets更新、発表の検索・絞り込み |
+| `data/card.json` | 名刺に掲載する氏名、所属、学年、メール、サイトURL |
+| `scripts/card.mjs` | 日英の名刺ページ生成 |
+| `scripts/card-assets.py` | QRコードと保存用PNGの再生成 |
 
 ## 更新
 
@@ -37,7 +40,7 @@ node scripts/build.mjs
 node --test tests/*.test.mjs
 ```
 
-生成された `index.html`, `en/`, `achievements/` もGitにコミットする。
+生成された `index.html`, `en/`, `achievements/`, `card/` もGitにコミットする。
 ページ間リンクとCSS・スクリプトのURLには、共通の内容ハッシュをクエリとして付ける。
 更新後に以前のページがブラウザのキャッシュから表示されるのを避けるためのもの。
 ブックマークなどから開いた古いページ自体が残っている場合は、再読み込みで最新版に切り替える。
@@ -103,7 +106,20 @@ bash scripts/deploy-lab.sh user@host:/absolute/web/directory/
 通常のSSH鍵または対話的なパスワード認証を使用し、既存リモートファイルは削除しない。
 実際のサーバー名・配置先・認証設定は未設定。
 
-## 次の拡張
+## 名刺形式の表示
 
-名刺代わりのスマートフォン用画面は未実装。
-サイトURLと `mailto:r.suda.813@ms.saitama-u.ac.jp` のQRコードを追加する予定。
+自己紹介文の直下に「名刺形式で表示 ↗」ボタンを配置する。日本語は `card/`、
+英語は `en/card/` を新しいタブで開く。所属と学年は名刺内に掲載する。
+QRコードはWebsite（サイトのトップ）とEmail（メール作成）の2つで、タップすると拡大する。
+`assets/ryosuke-suda-card.png` は1080 × 1440ピクセルの保存用画像。
+HTML・SVG・PNGは静的ファイルとして配信し、外部のQR生成サービスは利用しない。
+
+所属・学年・連絡先を変更するときは `data/card.json` を編集する。
+PillowとqrcodeをインストールしたPython環境で、日本語フォントを指定して画像を再生成する:
+
+```bash
+python scripts/card-assets.py --font /path/to/JapaneseFont.ttf
+node scripts/export.mjs
+```
+
+生成されたPNG・SVG・HTMLもコミットする。通常のサイトビルドにはPythonは不要。

@@ -3,15 +3,18 @@ import {fileURLToPath} from 'node:url';
 import {resolve,dirname} from 'node:path';
 import {createHash} from 'node:crypto';
 import {escapeHTML as e,isoDate,newestFirst,publicationHTML,talkHTML} from '../assets/records.mjs';
+import {cardHTML} from './card.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const read = async name => JSON.parse(await readFile(resolve(root, `data/${name}.json`),'utf8'));
 const papers = await read('publications');
 const talks = await read('talks');
 const sources = await read('sources');
+const card = await read('card');
 // Use a shared content version so navigation does not reuse older page caches.
 const versionFiles = ['scripts/build.mjs','assets/site.css','assets/favicon.svg','assets/achievements.mjs','assets/records.mjs',
-  'data/publications.json','data/talks.json','data/sources.json'];
+  'data/publications.json','data/talks.json','data/sources.json','data/card.json',
+  'scripts/card.mjs','assets/card.css','assets/card.mjs','assets/card-website.svg','assets/card-email.svg','assets/ryosuke-suda-card.png'];
 const versionHash = createHash('sha256');
 for (const [i,bytes] of (await Promise.all(versionFiles.map(name => readFile(resolve(root,name))))).entries()) {
   versionHash.update(versionFiles[i]).update('\0').update(bytes).update('\0');
@@ -112,6 +115,7 @@ for (const lang of ['ja','en']) for (const page of ['home','achievements']) {
       <h1>${t.name} <span class="other-name" lang="${lang==='ja'?'en':'ja'}">${t.otherName}</span></h1>
       ${contact}
       <p class="intro-text">${e(t.intro)}</p>
+      <p class="card-link"><a href="${base}${lang==='en'?'en/':''}card/index.html${version}" target="_blank" rel="noopener" aria-label="${lang==='ja'?'名刺形式で表示（新しいタブ）':'View as business card (new tab)'}">${lang==='ja'?'名刺形式で表示':'View as business card'} <span aria-hidden="true">↗</span></a></p>
     </div>`;
   const homeBody = `${introduction}${research}
     <section class="section" aria-labelledby="recent-title">
@@ -181,4 +185,9 @@ for (const lang of ['ja','en']) for (const page of ['home','achievements']) {
   await mkdir(dirname(resolve(root,route)),{recursive:true});
   await writeFile(resolve(root,route),html.replace(/[ \t]+$/gm,''));
 }
-console.log(`Built 4 pages: ${papers.items.length} publications, ${talks.items.length} presentations.`);
+for (const lang of ['ja','en']) {
+  const route = resolve(root, `${lang === 'en' ? 'en/' : ''}card/index.html`);
+  await mkdir(dirname(route), {recursive:true});
+  await writeFile(route, cardHTML(card, lang, version));
+}
+console.log(`Built 6 pages: ${papers.items.length} publications, ${talks.items.length} presentations, bilingual business card.`);

@@ -1,0 +1,56 @@
+:root {
+  color-scheme: light;
+  --purple: #65508e;
+  --ink: #222;
+  --muted: #62606a;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans JP", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+  background: #f8f7fa;
+  color: var(--ink);
+}
+* { box-sizing: border-box; }
+body { margin: 0; line-height: 1.6; }
+a { color: var(--purple); text-underline-offset: .2em; }
+a:hover { color: #3e2b61; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--purple); outline-offset: 4px; }
+.card-wrap { width: min(540px, 100%); margin: 0 auto; padding: 0 20px 24px; }
+.card-nav { display: flex; justify-content: space-between; padding: 18px 0; font-size: .85rem; }
+.business-card { background: #fff; border-top: 4px solid var(--purple); padding: 35px 32px 18px; }
+h1 { font-size: 2.1rem; line-height: 1.25; font-weight: 600; margin: 0 0 8px; }
+p { margin: 0; }
+.name-secondary { font-size: 1.15rem; color: var(--muted); margin-bottom: 26px; }
+.affiliation { font-size: .88rem; line-height: 1.8; }
+.affiliation-en { margin-top: 13px; color: var(--muted); font-size: .74rem; line-height: 1.7; }
+.card-contact { display: grid; gap: 6px; margin: 25px 0 24px; font-size: .85rem; }
+.card-contact a { width: fit-content; overflow-wrap: anywhere; }
+.qr-pair { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 24px; }
+.qr-button { text-decoration: none; color: var(--ink); text-align: center; font-size: .9rem; font-weight: 600; }
+.qr-button img { display: block; width: 100%; height: auto; margin-top: 6px; }
+.qr-hint { color: var(--muted); font-size: .7rem; text-align: center; margin-top: 10px; }
+.card-actions { text-align: center; margin-top: 16px; }
+.save-image { display: inline-block; padding: 7px 19px; border: 1px solid #c5bbd4; border-radius: 3px; font-size: .86rem; text-decoration: none; background: #fff; }
+dialog { width: min(430px, calc(100% - 32px)); padding: 18px; border: 1px solid #dcd7e4; color: var(--ink); background: #fff; }
+dialog::backdrop { background: rgb(0 0 0 / .6); }
+.close-dialog { display: block; margin-left: auto; font: inherit; font-size: .85rem; color: var(--purple); background: #fff; border: 1px solid #c5bbd4; border-radius: 3px; padding: 7px 12px; }
+dialog h2 { font-size: 1.1rem; text-align: center; margin: 12px 0 0; }
+dialog img { display: block; width: 100%; height: auto; }
+#qr-destination { display: block; text-align: center; overflow-wrap: anywhere; font-size: .84rem; }
+@media (max-width: 440px) {
+  :root { background: #fff; }
+  .card-wrap { padding: 0 16px 16px; }
+  .card-nav { padding: 13px 0; }
+  .business-card { padding: 23px 6px 8px; }
+  h1 { font-size: 1.85rem; }
+  .name-secondary { font-size: 1.05rem; margin-bottom: 19px; }
+  .affiliation { font-size: .8rem; }
+  .affiliation-en { font-size: .67rem; margin-top: 10px; }
+  .card-contact { font-size: .8rem; margin: 19px 0 18px; }
+  .qr-pair { gap: 18px; }
+  .qr-hint { margin-top: 5px; }
+  .card-actions { margin-top: 10px; }
+}
+@media print {
+  :root { background: #fff; }
+  .card-nav, .card-actions, .qr-hint, dialog { display: none; }
+  .card-wrap { width: 110mm; padding: 0; }
+  .business-card { break-inside: avoid; }
+}
